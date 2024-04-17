@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <p id = "choice">ここに日時を表示します</p>
+    <meta charset="UTF-8">
+    <title>Step8.円、線、多角形を描く|Lefletの基本|埼玉大学谷謙二研究室</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.0/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.3.0/dist/leaflet.js"></script>
+    <script>
+      window.alert('aa');
+      
+      document.getElementById('choice').textContent=new Date();
+       var circles = [];
+      function init() {
+        var map = L.map('mapcontainer', { zoomControl: false });
+        var mpoint = [35.8627,139.6072];
+        // 円を保持する配列を初期化
+
+        map.setView(mpoint, 14);
+        L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png', {
+          attribution: "<a href='https://maps.gsi.go.jp/development/ichiran.html' target='_blank'>地理院タイル</a>"
+        }).addTo(map);
+        //北浦和駅の座標
+        x0=35.871986
+        y0=139.645908
+        var nurawasta = [x0, y0];
+        //北浦和駅を中心に1000mごとの円を4つ作成する
+        //forループを使用
+        for (var i = 0; i < 4; i++) {
+    // 半径rは1000mから1000mずつ増やす
+    var r = i * 1000 + 1000;
+    // 中心座標を0.3ずつ増やす
+    var currentCenter = [x0 + (i * 0.01), y0 + (i * 0.02)];
+    // fillOpacityを計算。最初の円は不透明で、以降は徐々に薄くする。
+    var fillOpacity = 0.7 - (i * 0.2); // この係数を調整して、望む透明度の変化を得ます。
+    // fillOpacityが0より小さくならないようにする
+    if (fillOpacity < 0) fillOpacity = 0;
+    
+    // circleオブジェクトを作成して地図に追加
+    L.circle(currentCenter, { 
+      radius: r, 
+      color: "#FF5555", 
+      fill: true, 
+      fillColor: "#FF0000", 
+      weight: 3, 
+      fillOpacity: fillOpacity // ここで動的に設定
+    }).addTo(map);
+  }
+
+        //半径をピクセルで指定するcircleMarkerオブジェクトを駅の位置に追加
+        L.circleMarker(nurawasta, { radius: 20, color: "#5555ff", weight: 2, fill: true, fillColor: "#ffffff", opacity: 0.5 }).addTo(map);
+        //道路の座標を2次元配列に設定
+        var roadlatlons = [[35.865465, 139.60734], [35.870404, 139.6249], [35.870195, 139.6320], [35.871047, 139.6447], nurawasta];
+        //polylineオブジェクトを作成して地図に追加
+        L.polyline(roadlatlons, { color: 'blue', weight: 5 }).addTo(map);
+        //面の境界線を2次元配列に設定
+        var arealatlons = [[35.864891, 139.605503], [35.865969, 139.6088], [35.865378, 139.6097], [35.863309, 139.609559], [35.858996, 139.609709],
+          [35.858248, 139.608722], [35.859813, 139.6053], [35.864248, 139.6056], [35.864891, 139.605503]];
+        //polygonオブジェクトを作成して地図に追加
+        L.polygon(arealatlons, { color: 'green', weight: 2, fill: true, fillColor: 'green', opacity: 0.5 }).addTo(map);
+      
+      
+        document.getElementById('slider').addEventListener('input', function() {
+    var sliderValue = parseInt(this.value); // スライダーの値を整数に変換
+
+    // スライダーの値に基づいて円の新しい中心座標を計算
+    // スライダーの値が大きくなるにつれて、右上に移動する
+    var newLat = x0 + (sliderValue * 0.0001); // 緯度を微調整
+    var newLng = y0 + (sliderValue * 0.0002); // 経度を微調整
+
+    // スライダーの値に基づいて円の半径を計算
+    // スライダーの値が大きくなるにつれて、円も大きくなる
+    var newRadius = 1000 + (sliderValue * 10); // 半径を動的に変更
+
+    // circles配列内の円をクリア
+    circles.forEach(function(circle) {
+      map.removeLayer(circle);
+    });
+    circles = []; // 配列をリセット
+
+    // 新しい位置と半径で円を描画
+    var circle = L.circle([newLat, newLng], {
+      radius: newRadius, // 新しい半径で設定
+      color: "#FF5555",
+      fill: true,
+      fillColor: "#FF0000",
+      weight: 3,
+      fillOpacity: 0.5
+    }).addTo(map);
+    circles.push(circle); // 更新した円を配列に追加
+  });
+      }
+    </script>
+  </head>
+
+  <body onload="init()">
+    <div id="mapcontainer" style="position:absolute;top:0;left:0;right:0;bottom:0;"></div>
+
+      
+    
+    <div style="position: absolute; top: 95%; left: 50%; transform: translateX(-50%);">
+      <input type="range" id="slider" min="0" max="100" value="50">
+    </div>
+  </body>
+</html>

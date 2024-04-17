@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Dynamic Circle with Leaflet</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.0/dist/leaflet.css" />
+    <style>
+      #mapid { height: 700px; }
+      .slider {
+          position: absolute;
+          bottom: 40px; /* 目盛りの分だけ下げる */
+          left: 50%;
+          transform: translateX(-50%);
+          width: 300px;
+      }
+      .slider-marks {
+          display: flex;
+          justify-content: space-between; /* 目盛りを均等に配置 */
+          position: absolute;
+          bottom: 20px; /* スライダーの直下に配置 */
+          left: 50%;
+          transform: translateX(-50%);
+          width: 300px; /* スライダーと同じ幅 */
+      }
+      .slider-marks span {
+          font-size: 12px;
+          /* スライダーのつまみの中心に合わせるための調整 */
+          transform: translateX(-50%);
+          font-weight: bold;
+      }
+  </style>
+</head>
+
+
+<body>
+  
+<div id="mapid"></div>
+<input type="range" id="slider" class="slider" min="0" max="4" value="0">
+<div class="slider-marks">
+  <span>0h</span>
+  <span>1h</span>
+  <span>2h</span>
+  <span>3h</span>
+  <span>4h</span>
+</div>
+<script src="https://unpkg.com/leaflet@1.3.0/dist/leaflet.js"></script>
+<script>
+    // JSONデータの読み込み（仮のデータとして直接定義）
+    //この1時間ごとの潮流の差分データは，GETもしくは，相手サーバのPUTで取得する．
+    var jsonData = {
+        "sabunn": [
+            {"time": "0h", "data": [{"lati": 0.000, "longt": 0.00}]},
+            {"time": "1h", "data": [{"lati": 0.001, "longt": 0.001}]},
+            {"time": "2h", "data": [{"lati": 0.002, "longt": 0.001}]},
+            {"time": "3h", "data": [{"lati": 0.003, "longt": 0.001}]},
+            {"time": "4h", "data": [{"lati": 0.004, "longt": 0.001}]}
+        ]
+    };
+
+    var map = L.map('mapid').setView([51.505, -0.09], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    var initialCircle = L.circle([51.505, -0.09], {
+        color: 'blue',
+        fillColor: '#f03',
+        fillOpacity: 0.5,
+        radius: 100
+    }).addTo(map);
+
+    document.getElementById('slider').addEventListener('input', function() {
+        var value = parseInt(this.value); // スライダーの値を取得
+        var accumulatedLati = 51.505;
+        var accumulatedLongt = -0.09;
+
+        for (let i = 0; i <= value; i++) {
+            accumulatedLati += jsonData.sabunn[i].data[0].lati;
+            accumulatedLongt += jsonData.sabunn[i].data[0].longt;
+        }
+
+        var newRadius = 100 + value * 30;
+        var newOpacity = 1 - value * 0.005;
+
+        initialCircle.setLatLng([accumulatedLati, accumulatedLongt]);
+        initialCircle.setRadius(newRadius);
+        initialCircle.setStyle({
+            color: `rgba(255, 0, 0, ${newOpacity})`,
+            fillColor: `rgba(255, 0, 0, ${newOpacity})`,
+            fillOpacity: newOpacity
+        });
+    });
+</script>
+
+</body>
+</html>
