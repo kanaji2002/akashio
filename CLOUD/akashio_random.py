@@ -10,6 +10,12 @@ from sklearn.metrics import confusion_matrix
 import seaborn as sns
 import matplotlib.pyplot as plt
 from datetime import datetime, timedelta
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import firestore
+import pytz
+
+import time
 
 ## akashio_random.py
 def yosoku2():
@@ -100,19 +106,9 @@ def yosoku2():
     })
 
 
-    # 混同マトリックスを可視化
-    labels = df['label_class'].cat.categories
-    # sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues', xticklabels=labels, yticklabels=labels)
-    # plt.xlabel('Predicted')
-    # plt.ylabel('True')
-    # plt.title('Confusion Matrix')
-    # plt.show()
-    # print("Confusion Matrix:")
-    # print(conf_matrix)
-     # 分類レポートを表示
-    #report = classification_report(label_test, label_pred)
-    #rint("Classification Report:")
-    # print(report)
+    # # 混同マトリックスを可視化
+    # labels = df['label_class'].cat.categories
+
 # 予測を行う
     
     string0="かなり安全"
@@ -140,17 +136,49 @@ def yosoku2():
             week_df.loc[i,'answer']=string3
         elif predicted_label==4:
             week_df.loc[i,'answer']=string4
-        
-        week_df.to_csv('predict_csv/week_df.csv',index=False)
-    return week_df
-        # print(f"Accuracy: {accuracy:.3f}")
+            
+    # week_df['datetime']=datetime.strftime(week_df['datetime'],)        
+    # week_df['datetime']=week_df['datetime']+week_df['hour']
+    week_df['datetime'] = pd.to_datetime(week_df['datetime'])
+    # hour列を文字列型に変換
+    week_df['hour'] = week_df['hour'].astype(str)
+
+    # datetime列とhour列を結合して新しい列を作成
+    week_df['datetime_with_hour'] = week_df['datetime'].dt.strftime('%Y-%m-%d') + ' ' + week_df['hour']
 
     
+    week_df.to_csv('predict_csv/week_df.csv',index=False)
+    
+        
+        
 
-        # # 混同マトリックスを表示
+        # 日本時間のタイムゾーンを取得
+
+        
+
+    return week_df
+        # print(f"Accuracy: {accuracy:.3f}")
+def add_data_to_firestore_one_week(df):
+    # Firebaseの認証情報を使用して初期化
+    # cred = credentials.Certificate('akshio-test1-firebase-adminsdk-kdl6f-8e7fe843c3.json')
+    cred = credentials.Certificate('mic-kagawa-dx-murakamilab-firebase-adminsdk-5vxj6-9f29dca6a9.json')
+
+    firebase_admin.initialize_app(cred)
+
+    # Firestoreデータベースのインスタンスを取得
+    db = firestore.client()
+    for index, row in df.iterrows():
+        doc_ref = db.collection('one_week_predict').document()
+        doc_ref.set(row.to_dict())
+        
+    return 0
+        
+        
+week_df=yosoku2()
+add_data_to_firestore_one_week(week_df)
 
 
 
 
 
-print(yosoku2())
+# print(yosoku2())

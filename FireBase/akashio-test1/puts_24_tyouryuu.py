@@ -32,7 +32,8 @@ def tyouryuu_24():
 
     # 現在の日時から24時間分のデータを選択
     future_datetime = current_datetime + timedelta(hours=24)
-    mask = (df['date'] >= current_datetime) & (df['date'] <= future_datetime)
+    minus_9hours_from_now=current_datetime-timedelta(hours=9)
+    mask = (df['date'] >= minus_9hours_from_now) & (df['date'] <= future_datetime)
     df24 = df.loc[mask]
     df24['date']=df24['date'].dt.strftime('%H:%M')
     
@@ -51,13 +52,22 @@ def tyouryuu_24():
 
 # tyouryuu_24()
 
+def delete_collection(collection_ref, batch_size):
+    docs = collection_ref.limit(batch_size).stream()
+    deleted = 0
+    for doc in docs:
+        print(f'Deleting doc {doc.id} => {doc.to_dict()}')
+        doc.reference.delete()
+        deleted = deleted + 1
+    if deleted >= batch_size:
+        return delete_collection(collection_ref, batch_size)
 
-
-def send_data_to_firestore(df):
+def send_data_to_firestore(df,collection_name):
     # CSVファイルを読み込む
     # df = pd.read_csv('tyouryuu/sabunn/201601_sabunn.csv')
-   
-    
+    collection_ref = db.collection(collection_name)
+    # コレクションのデータを削除
+    delete_collection(collection_ref, batch_size=10)
     # DataFrameの各行をJSON形式に変換してFirestoreに送信
     for index, row in df.iterrows():
         data = row.to_dict()
@@ -67,7 +77,7 @@ def send_data_to_firestore(df):
 
 
 tyouryuu_24_df=tyouryuu_24()
-send_data_to_firestore(tyouryuu_24_df)
+send_data_to_firestore(tyouryuu_24_df,'your_collection')
 
 # # スケジューラーにジョブを追加
 # schedule.every().hour.do(send_data_to_firestore)

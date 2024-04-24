@@ -1,122 +1,167 @@
 [
     {
-        "date":"19:00",
-        "delta_lat":0.083911,
-        "delta_lng":-0.056139
-    },
-    {
-        "date":"20:00",
-        "delta_lat":0.101711,
-        "delta_lng":-0.104057
-    },
-    {
-        "date":"21:00",
-        "delta_lat":0.103067,
-        "delta_lng":-0.108389
-    },
-    {
-        "date":"22:00",
-        "delta_lat":0.099281,
-        "delta_lng":-0.104599
-    },
-    {
-        "date":"23:00",
-        "delta_lat":0.084477,
-        "delta_lng":-0.08699
-    },
-    {
-        "date":"00:00",
-        "delta_lat":0.059727,
-        "delta_lng":-0.059947
-    },
-    {
-        "date":"01:00",
-        "delta_lat":0.011471,
-        "delta_lng":-0.014466
-    },
-    {
-        "date":"02:00",
-        "delta_lat":-0.042549,
-        "delta_lng":0.036536
-    },
-    {
-        "date":"03:00",
-        "delta_lat":-0.080634,
-        "delta_lng":0.081407
-    },
-    {
-        "date":"04:00",
-        "delta_lat":-0.084816,
-        "delta_lng":0.090055
-    },
-    {
-        "date":"05:00",
-        "delta_lat":-0.067355,
-        "delta_lng":0.077306
-    },
-    {
-        "date":"06:00",
-        "delta_lat":-0.014918,
-        "delta_lng":0.035094
-    },
-    {
-        "date":"07:00",
-        "delta_lat":0.066112,
-        "delta_lng":-0.037489
-    },
-    {
-        "date":"08:00",
-        "delta_lat":0.101089,
-        "delta_lng":-0.105584
-    },
-    {
-        "date":"09:00",
-        "delta_lat":0.111204,
-        "delta_lng":-0.1252
-    },
-    {
-        "date":"10:00",
-        "delta_lat":0.111995,
-        "delta_lng":-0.122026
-    },
-    {
         "date":"11:00",
-        "delta_lat":0.099168,
-        "delta_lng":-0.107153
+        "delta_lat":0.079278,
+        "delta_lng":-0.052716
     },
     {
         "date":"12:00",
-        "delta_lat":0.072158,
-        "delta_lng":-0.076595
+        "delta_lat":0.113577,
+        "delta_lng":-0.126257
     },
     {
         "date":"13:00",
-        "delta_lat":0.030796,
-        "delta_lng":-0.035163
+        "delta_lat":0.123296,
+        "delta_lng":-0.13984
     },
     {
         "date":"14:00",
-        "delta_lat":-0.030061,
-        "delta_lng":0.016225
+        "delta_lat":0.115329,
+        "delta_lng":-0.129354
     },
     {
         "date":"15:00",
-        "delta_lat":-0.08103,
-        "delta_lng":0.073926
+        "delta_lat":0.080917,
+        "delta_lng":-0.092577
     },
     {
         "date":"16:00",
-        "delta_lat":-0.108153,
-        "delta_lng":0.103843
+        "delta_lat":0.028366,
+        "delta_lng":-0.041831
     },
     {
         "date":"17:00",
-        "delta_lat":-0.101767,
-        "delta_lng":0.100195
+        "delta_lat":-0.060857,
+        "delta_lng":0.031985
     },
     {
         "date":"18:00",
-        "delta_lat":-0.072441,
-        "delta_lng":0.07688
+        "delta_lat":-0.132733,
+        "delta_lng":0.111678
+    },
+    {
+        "date":"19:00",
+        "delta_lat":-0.159178,
+        "delta_lng":0.136607
+    },
+    {
+        "date":"20:00",
+        "delta_lat":-0.146577,
+        "delta_lng":0.130573
+    },
+    {
+        "date":"21:00",
+        "delta_lat":-0.116459,
+        "delta_lng":0.106273
+    },
+    {
+        "date":"22:00",
+        "delta_lat":-0.061761,
+        "delta_lng":0.062672
+    },
+    {
+        "date":"23:00",
+        "delta_lat":0.038198,
+        "delta_lng":-0.011536
+    },
+    {
+        "date":"00:00",
+        "delta_lat":0.09866,
+        "delta_lng":-0.097722
+    },
+    {
+        "date":"01:00",
+        "delta_lat":0.107927,
+        "delta_lng":-0.13044
+    },
+    {
+        "date":"02:00",
+        "delta_lat":0.112051,
+        "delta_lng":-0.131921
+    },
+    {
+        "date":"03:00",
+        "delta_lat":0.096738,
+        "delta_lng":-0.113146
+    },
+    {
+        "date":"04:00",
+        "delta_lat":0.054415,
+        "delta_lng":-0.070002
+    },
+    {
+        "date":"05:00",
+        "delta_lat":-0.017517,
+        "delta_lng":-0.006895
+    },
+    {
+        "date":"06:00",
+        "delta_lat":-0.10092,
+        "delta_lng":0.077582
+    },
+    {
+        "date":"07:00",
+        "delta_lat":-0.142,
+        "delta_lng":0.125806
+    },
+    {
+        "date":"08:00",
+        "delta_lat":-0.143469,
+        "delta_lng":0.128287
+    },
+    {
+        "date":"09:00",
+        "delta_lat":-0.119849,
+        "delta_lng":0.108251
+    },
+    {
+        "date":"10:00",
+        "delta_lat":-0.078769,
+        "delta_lng":0.073743
+    },
+    {
+        "date":"11:00",
+        "delta_lat":0.001526,
+        "delta_lng":0.01181
+    },
+    {
+        "date":"12:00",
+        "delta_lat":0.094648,
+        "delta_lng":-0.080088
+    },
+    {
+        "date":"13:00",
+        "delta_lat":0.108266,
+        "delta_lng":-0.125614
+    },
+    {
+        "date":"14:00",
+        "delta_lat":0.11612,
+        "delta_lng":-0.132324
+    },
+    {
+        "date":"15:00",
+        "delta_lat":0.095947,
+        "delta_lng":-0.108993
+    },
+    {
+        "date":"16:00",
+        "delta_lat":0.052551,
+        "delta_lng":-0.064166
+    },
+    {
+        "date":"17:00",
+        "delta_lat":-0.019099,
+        "delta_lng":-0.0026
+    },
+    {
+        "date":"18:00",
+        "delta_lat":-0.106627,
+        "delta_lng":0.081833
+    },
+    {
+        "date":"19:00",
+        "delta_lat":-0.153753,
+        "delta_lng":0.131001
     }
 ]

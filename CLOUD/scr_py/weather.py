@@ -97,6 +97,6 @@ def scr_weather():
     driver.close()
     return df
 
-scr_weather()
+# scr_weather()
 
 

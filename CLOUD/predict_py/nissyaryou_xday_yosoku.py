@@ -89,8 +89,6 @@ def predict_temperature(model, specified_data,weather_df):
     print(f'today : {specified_data}')
     datetime_temp = []
     nissyaryou_temp = []
-    # print("データの最初の日付:", data.index.min())
-    # print("データの最後の日付:", data.index.max())
 
     # # 日付のフォーマット
     # specified_date = '2002/1/1'

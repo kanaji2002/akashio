@@ -20,7 +20,9 @@ df['label_class'] = pd.cut(df['Chl.a'], bins=[-np.inf, 1, np.inf], labels=[0, 1]
 
 # 説明変数として使用する列を選択
 #selected_columns = ['DO', 'nissyaryou','kousuiryou_1pre','Sal','hour','Tem']
-selected_columns = ['Tem', 'nissyaryou','kousuiryou_2pre','uv','hour']
+# selected_columns = ['Tem', 'nissyaryou','kousuiryou_2pre','uv','hour']
+selected_columns = ['Tem', 'nissyaryou','kousuiryou_2pre','hour']
+
 
 #'kousuiryou_0pre','kousuiryou_1pre',
 # 正解データの列を指定
